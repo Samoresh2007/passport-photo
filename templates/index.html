@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Photo Studio Pro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #2b2b45);
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background: #2f2f4f;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #4CAF50;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+.preview {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.preview img {
+    max-width: 100%;
+    border-radius: 10px;
+    display: none;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row div {
+    flex: 1;
+}
+
+@media(max-width: 600px) {
+    .row {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <h1>📸 Photo Studio Pro</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <label>Upload Photo</label>
+            <input type="file" name="image" id="imageInput" required>
+
+            <div class="preview">
+                <img id="previewImg">
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Background</label>
+                    <select name="bg">
+                        <option value="white">White</option>
+                        <option value="blue">Blue</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Paper Size</label>
+                    <select name="paper">
+                        <option value="4x6">4x6</option>
+                        <option value="5x7">5x7</option>
+                        <option value="8x10">8x10</option>
+                        <option value="A4">A4</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Copies</label>
+                    <input type="number" name="copies" value="4">
+                </div>
+
+                <div>
+                    <label>Color Grade</label>
+                    <select name="grade">
+                        <option value="none">Normal</option>
+                        <option value="warm">Warm</option>
+                        <option value="cool">Cool</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit">🚀 Process & Download</button>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+const input = document.getElementById("imageInput");
+const preview = document.getElementById("previewImg");
+
+input.addEventListener("change", function() {
+    const file = this.files[0];
+    if (file) {
+        preview.style.display = "block";
+        preview.src = URL.createObjectURL(file);
+    }
+});
